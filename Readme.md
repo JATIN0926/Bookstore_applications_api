@@ -290,3 +290,30 @@ You can test this API directly using Postman — no need to clone or run it loca
    ```makefile
    Authorization: Bearer <your_token>
    ```
+
+3. **Make requests** to protected routes like:
+
+```http
+GET https://bookstore-applications-api.onrender.com/api/books/getAll
+POST https://bookstore-applications-api.onrender.com/api/books/create
+GET https://bookstore-applications-api.onrender.com/api/books/get/:id
+PUT https://bookstore-applications-api.onrender.com/api/books/update/:id
+DELETE https://bookstore-applications-api.onrender.com/api/books/delete/:id
+```
+
+## 💡 Assumptions
+
+- All `/api/books/*` routes are protected and require a valid JWT token
+- MongoDB Atlas is used as the database
+- Passwords are securely hashed before storage
+- Password must be at least **6 characters** long
+- The application is stateless — JWT tokens are sent with each request
+- Ratings must be numbers between `0` and `5`
+
+## 🧩 Enhancements (Optional / Future Work)
+
+- Swagger / OpenAPI documentation for testing and developer reference
+- Refresh tokens with secure cookie storage for longer sessions
+- Role-based authorization (admin vs regular user)
+- Upload book cover images to Cloudinary or similar storage
+- GitHub Actions for CI/CD pipelines
