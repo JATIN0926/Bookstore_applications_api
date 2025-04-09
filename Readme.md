@@ -102,7 +102,7 @@ docker run -p 5000:5000 --env-file .env bookstore-api
 {
   "statusCode": 200,
   "data": {
-    "_id": "67f64013460852d25d68516e",
+    "_id": "user _id",
     "email": "test@gmail.com",
     "token": "your_token_here"
   },
@@ -158,3 +158,34 @@ This route supports multiple query parameters for filtering, searching, sorting,
 #### `GET /api/books/getAll?author=James Clear`
 
 - Search books with the word **atomic** in the title:
+
+#### `GET /api/books/getAll?search=atomic`
+
+- Filter by category **Self-Help** and **rating 4**:
+
+#### `GET /api/books/getAll?category=Self-Help&rating=4`
+
+- Paginate (page 2, 5 books per page):
+
+#### `GET /api/books/getAll?page=2&limit=5`
+
+- Sort books by **price ascending**:
+
+#### `GET /api/books/getAll?sortBy=price&order=asc`
+
+- Combined example (search + filter + sort + pagination):
+
+#### `GET /api/books/getAll?search=habits&category=Self-Help&sortBy=rating&order=desc&page=1&limit=3`
+
+### Get book by id
+
+#### `GET /api/books/get/:id`
+
+Get a single book by its ID.
+
+**Example:**
+
+```http
+GET /api/books/get/65f111e4b0aa2a5ed9f5dfc1
+```
+
