@@ -71,3 +71,90 @@ docker run -p 5000:5000 --env-file .env bookstore-api
   "password": "securepassword"
 }
 ```
+
+**Response:**
+
+```json
+{
+  "statusCode": 201,
+  "data": {
+    "_id": "user _id",
+    "email": "test@gmail.com",
+    "token": "your_token_here"
+  },
+  "message": "User registered successfully",
+  "success": true
+}
+```
+
+#### `POST /api/auth/login`
+
+```json
+{
+  "email": "test@gmail.com",
+  "password": "test123"
+}
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "_id": "67f64013460852d25d68516e",
+    "email": "test@gmail.com",
+    "token": "your_token_here"
+  },
+  "message": "Login successful",
+  "success": true
+}
+```
+
+### 📚 Books (Protected)
+
+Add the following header to all book routes:
+
+`Authorization: Bearer <JWT_TOKEN>` (received at signup and login time)
+
+#### `POST /api/books/create`
+
+```json
+{
+  "title": "Atomic Habits",
+  "author": "James Clear",
+  "category": "Self-Help",
+  "price": 399,
+  "rating": 4.8,
+  "publishedDate": "2018-10-16"
+}
+```
+
+#### `GET /api/books/getAll`
+
+This route supports multiple query parameters for filtering, searching, sorting, and pagination.
+
+---
+
+### 🔍 Available Query Parameters:
+
+| Parameter  | Description                                | Example                     |
+| ---------- | ------------------------------------------ | --------------------------- |
+| `search`   | Search books by partial match in the title | `?search=atomic`            |
+| `author`   | Filter books by author (case-insensitive)  | `?author=James Clear`       |
+| `category` | Filter by category/genre                   | `?category=Self-Help`       |
+| `rating`   | Filter by exact rating                     | `?rating=4`                 |
+| `page`     | Page number for pagination                 | `?page=2`                   |
+| `limit`    | Number of books per page                   | `?limit=5`                  |
+| `sortBy`   | Sort field: `price` or `rating`            | `?sortBy=price`             |
+| `order`    | Sort order: `asc` or `desc`                | `?sortBy=rating&order=desc` |
+
+---
+
+### 📘 Sample Requests:
+
+- Get all books with author **James Clear**:
+
+#### `GET /api/books/getAll?author=James Clear`
+
+- Search books with the word **atomic** in the title:
