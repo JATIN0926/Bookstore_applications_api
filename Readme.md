@@ -189,3 +189,104 @@ Get a single book by its ID.
 GET /api/books/get/65f111e4b0aa2a5ed9f5dfc1
 ```
 
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "_id": "65f111e4b0aa2a5ed9f5dfc1",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Self-Help",
+    "price": 399,
+    "rating": 4.8,
+    "publishedDate": "2018-10-16T00:00:00.000Z"
+  },
+  "message": "Success",
+  "success": true
+}
+```
+
+#### `PUT /api/books/update/:id`
+
+Update details of a book by its ID.
+
+**Example:**
+
+```http
+PUT /api/books/update/65f111e4b0aa2a5ed9f5dfc1
+```
+
+**Request Body:**
+
+```json
+{
+  "price": 299,
+  "rating": 4.5
+}
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "_id": "65f111e4b0aa2a5ed9f5dfc1",
+    "price": 299,
+    "rating": 4.5,
+    ...
+  },
+  "message": "Book updated successfully",
+  "success": true
+}
+```
+
+#### `DELETE /api/books/delete/:id`
+
+Delete a book by its ID.
+
+**Example:**
+
+```http
+DELETE /api/books/delete/65f111e4b0aa2a5ed9f5dfc1
+```
+
+**Response:**
+
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "_id": "65f111e4b0aa2a5ed9f5dfc1",
+    ...
+  },
+  "message": "Book deleted successfully",
+  "success": true
+}
+```
+
+---
+
+## 🧪 Testing in Postman (Deployed API)
+
+You can test this API directly using Postman — no need to clone or run it locally.
+
+**Base URL:**
+
+`https://bookstore-applications-api.onrender.com`
+
+### 🔐 Example Workflow
+
+1. **Signup or Login** to get your JWT token:
+
+   ```http
+   POST https://bookstore-applications-api.onrender.com/api/auth/login
+   ```
+
+2. Use the **token** in the Authorization header:
+
+   ```makefile
+   Authorization: Bearer <your_token>
+   ```
