@@ -1,4 +1,5 @@
-import { ApiError } from "../utils/ApiError.js";
+import { ApiError } from '../utils/ApiError.js';
+import mongoose from 'mongoose';
 
 const errorHandler = (err, req, res, next) => {
   if (err instanceof ApiError) {
@@ -10,11 +11,21 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  console.error("Unhandled Error:", err);
+  if (err instanceof mongoose.Error.ValidationError) {
+    const formattedErrors = Object.values(err.errors).map((e) => e.message);
+    return res.status(400).json({
+      success: false,
+      message: formattedErrors.join(', '),
+      errors: formattedErrors,
+      data: null,
+    });
+  }
+
+  console.error('Unhandled Error:', err);
 
   return res.status(500).json({
     success: false,
-    message: "Internal Server Error",
+    message: 'Internal Server Error',
     errors: [],
     data: null,
   });

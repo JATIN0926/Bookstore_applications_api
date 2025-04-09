@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
+import bookRoutes from './routes/book.routes.js';
 import errorHandler from "./middlewares/errorHandler.js";
 import cookieParser from 'cookie-parser';
 
@@ -25,6 +26,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+
+app.use('/api/books', bookRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
